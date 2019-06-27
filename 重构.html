@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset='utf-8'>
+            <title>Interview Documentation</title>
+        </head>
+
+        <body>
+            <nav id='navbar'>
+                <header>Interview Documentation</header>
+                <ul>
+                    <li><a class='nav-link' href='#checkPrime'>check Prime</a></li>
+                    <li><a class='nav-link' href='#primeFactors'>Prime Factors</a></li>
+                    <li><a class='nav-link' href='#fibonacci'>Fibonacci</a></li>
+                    <li><a class='nav-link' href='#greatestCommonDivisor'>Greatest Common Divisor</a></li>
+                    <li><a class='nav-link' href='#removeDuplicate'>remove Duplicate</a></li>
+                    <li><a class='nav-link' href='#mergeTwoSortedArray'>merge two sorted array</a></li>
+                    <li><a class='nav-link' href='#swapNumberWithoutTemp'>swap number without temp</a></li>
+                    <li><a class='nav-link' href='#stringReverse'>string reverse</a></li>
+                    <li><a class='nav-link' href='#reverseWords'>reverse words</a></li>
+                    <li><a class='nav-link' href='#reverseInPlace'>reverse in place</a></li>
+                    <li><a class='nav-link' href='#firstNonRepeatingChar'>First non repeating char</a></li>
+                    <li><a class='nav-link' href='#removeDuplicateChar'>remove duplicate char</a></li>
+                    <li><a class='nav-link' href='#checkPalindrome'>check palindrome</a></li>
+                    <li><a class='nav-link' href='#randomBetween_5_to_7'>random between 5 to 7</a></li>
+                    <li><a class='nav-link' href='#missingNumber'>missing number</a></li>
+                </ul>
+            </nav>
+        </body>
+
+        <main id='main-doc'>
+            <section class='main-section'>
+                <header id='checkPrime'>check Prime</header>
+                <p><strong>Question: </strong>How would you verify a prime number?</p>
+                <p><strong>Answer: </strong>a prime number is only divisible by itself and 1. So, i will run a while loop and increase by 1. (look at the code example. If you dont get it. this is not your cake. do learn javaScript basics and come back.)</p>
+                <code>
+                        function isPrime(n){
+                            var divisor = 2;
+                          
+                            while (n > divisor){
+                              if(n % divisor == 0){
+                               return false; 
+                              }
+                              else
+                                divisor++;
+                            }
+                            return true;
+                          }
+                          
+                          > isPrime(137);
+                            = true
+                          > isPrime(237);
+                            = false
+                </code>
+                <p><strong>Interviewer: </strong>Can you make this better?</p>
+                <p><strong>You: </strong>yes. the divisor are increased 1 at a time. after 3 i can increase by 2. if a number is divisible by any even number, it will be divisible by 2.</p>
+                <p><strong>Extra: </strong>if you dont have to increase the divisor up to the number. you can stop much earlier. let me explain it in the following steps (just seat back and read as many times as needed)</p>
+            </section>
+            
+            <section class='main-section'>
+                <header id='primeFactors'>Prime Factors</header>
+                <p><strong>Question: </strong>How could you find all prime factors of a number?</p>
+                <p><strong>Answer: </strong>Run a while loop. start dividing by two and if not divisible increase divider until u r done.</p>
+                <code>
+                        function primeFactors(n){
+                            var factors = [], 
+                                divisor = 2;
+                            
+                            while(n>2){
+                              if(n % divisor == 0){
+                                 factors.push(divisor); 
+                                 n= n/ divisor;
+                              }
+                              else{
+                                divisor++;
+                              }     
+                            }
+                            return factors;
+                          }
+                          
+                          > primeFactors(69);
+                            = [3, 23]
+                </code>
+                <p><strong>Interviewer: </strong>What is the run time complexity? can you make this better</p>
+                <p><strong>You: </strong>this is O(n). you can increase divisor by 2 form divisor = 3. Because, if a number is divisible by any even number it would divisible by 2. Hence, you dont need to divide by even numbers. Besides, you will not have a factor bigger than half of its value. if you want make it complex use tough concept in no. 1 (try-2. if u get it)</p>
+            </section>
+
+            <section class='main-section'>
+                <header id='fibonacci'>Fibonacci</header>
+                <p><strong>Question: </strong>How do get nth Fibonacci number?</p>
+                <p><strong>Answer: </strong>I create an array and start from iterate through.
+                    Fibonacci series is one of the most popular interview question for beginners. so, you have to learn this one.</p>
+                <ul>
+                    <li>
+                        try 1
+                        <code>
+                                function fibonacci(n){
+                                    var fibo = [0, 1];
+                                    
+                                    if (n <= 2) return 1;
+                                  
+                                    for (var i = 2; i <=n; i++ ){
+                                     fibo[i] = fibo[i-1]+fibo[i-2];
+                                    }
+                                  
+                                   return fibo[n];
+                                  } 
+                                  
+                                  > fibonacci(12);
+                                    = 144 
+                        </code>
+                        <p><strong>Interviewer: </strong>What is the run time complexity?</p>
+                        <p><strong>you: </strong>O(n)</p>
+                        <p><strong>Interviewer: </strong>can you make it recursive?</p>
+                    </li>
+                    <li>
+                        try 2
+                        <code>
+                                function fibonacci(n){
+                                    if(n<=1)
+                                      return n;
+                                    else
+                                      return fibonacci(n-1) + fibonacci (n-2);  
+                                  }
+                                  
+                                  > fibonacci(12);
+                                    = 144
+                        </code>
+                        <p><strong>Interviewer: </strong>What is the run time complexity?</p>
+                        <p><strong>You:  </strong>O(2n). detail about complexity</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class='main-section'>
+                    <header id='greatestCommonDivisor'>check PrimeGreatest Common Divisor</header>
+                    <p><strong>Question: </strong>How would you find the greatest common divisor of two numbers?</p>
+                    <code>
+                            function greatestCommonDivisor(a, b){
+                                var divisor = 2, 
+                                    greatestDivisor = 1;
+                              
+                                //if u pass a -ve number this will not work. fix it dude!!
+                                if (a < 2 || b < 2)
+                                   return 1;
+                                
+                                while(a >= divisor && b >= divisor){
+                                 if(a %divisor == 0 && b% divisor ==0){
+                                    greatestDivisor = divisor;      
+                                  }
+                                 divisor++;
+                                }
+                                return greatestDivisor;
+                              }
+                              
+                              > greatestCommonDivisor(14, 21);
+                                =7 
+                              > greatestCommonDivisor(69, 169);
+                                = 1
+                    </code>
+                    <h2>fancy algorithm</h2>
+                    <p><strong>Sorry. </strong>can't explain it. As i myself dont understand it 80% of the times. my algorithm analysis instructor told about this and stole if from class note (i am a good student, btw!)</p>
+                    <code>
+                            function greatestCommonDivisor(a, b){
+                                if(b == 0)
+                                  return a;
+                                else 
+                                  return greatestCommonDivisor(b, a%b);
+                             }
+                    </code>
+                    <p><strong>Note: </strong>use your brain to understand it.</p>
+            </section>
+
+            <section class='main-section'>
+                <header id='removeDuplicate'>remove Duplicate</header>
+                <p><strong>Question: </strong>How would you remove duplicate members from an array?</p>
+                <p><strong>Answer: </strong>will start a while looping and keep an object/ associated array. If i find an element for the first time i will set its value as true (that will tell me element added once.). if i find a element in the exists object, i will not insert it into the return array.</p>
+                <code>
+                        function removeDuplicate(arr){
+                            var exists ={},
+                                outArr = [], 
+                                elm;
+                          
+                            for(var i =0; i<arr.length; i++){
+                              elm = arr[i];
+                              if(!exists[elm]){
+                                outArr.push(elm);
+                                exists[elm] = true;
+                             }
+                            }
+                            return outArr;
+                          }
+                          
+                          > removeDuplicate([1,3,3,3,1,5,6,7,8,1]);
+                            = [1, 3, 5, 6, 7, 8]
+                </code>
+            </section>
+
+            <section class='main-section'>
+                <header id='mergeTwoSortedArray'>merge two sorted array</header>
+                <p><strong>Question: </strong>How would you merge two sorted array?</p>
+                <p><strong>Answer: </strong>I will keep a pointer for each array and (read the code. and be careful about this one.)</p>
+                <code>
+                        function mergeSortedArray(a, b){
+                            var merged = [], 
+                                aElm = a[0],
+                                bElm = b[0],
+                                i = 1,
+                                j = 1;
+                            
+                            if(a.length ==0)
+                              return b;
+                            if(b.length ==0)
+                              return a;
+                            /* 
+                            if aElm or bElm exists we will insert to merged array
+                            (will go inside while loop)
+                             to insert: aElm exists and bElm doesn't exists
+                                       or both exists and aElm < bElm
+                              this is the critical part of the example            
+                            */
+                            while(aElm || bElm){
+                             if((aElm && !bElm) || aElm < bElm){
+                               merged.push(aElm);
+                               aElm = a[i++];
+                             }   
+                             else {
+                               merged.push(bElm);
+                               bElm = b[j++];
+                             }
+                            }
+                            return merged;
+                          }
+                          
+                          > mergeSortedArray([2,5,6,9], [1,2,3,29]);
+                           = [1, 2, 2, 3, 5, 6, 9, 29]
+                </code>
+            </section>
+
+            <section class='main-section'>
+                <header id='swapNumberWithoutTemp'>swap number without temp</header>
+                <p><strong>Question: </strong>How would you swap two numbers without using a temporary variable?</p>
+                <p><strong>Answer: </strong>Waste time about thinking it. though u know the answer, act like you are thinking and take your time to answer this one.</p>
+                <code>
+                        function swapNumb(a, b){
+                            console.log('before swap: ','a: ', a, 'b: ', b);
+                            b = b -a;
+                            a = a+ b;
+                            b = a-b;
+                            console.log('after swap: ','a: ', a, 'b: ', b);  
+                          }
+                          
+                          > swapNumb(2, 3);
+                             = before swap:  a:  2 b:  3
+                             = after swap:  a:  3 b:  2 
+                </code>
+                <p><strong>bit manipulation: </strong>Sorry, i can't explain this to you. Kinjal Dave suggested logical conjunction to understand it. Waste 30 min there at your own risk.</p>
+                <code>
+                        function swapNumb(a, b){
+                            console.log("a: " + a + " and b: " + b);
+                            a = a ^ b;
+                            b = a ^ b;
+                            a = a ^ b;
+                            console.log("a: " + a + " and b: " + b);
+                          }
+                          
+                          > swapNumb(2, 3);
+                            = a: 2 and b: 3
+                            = a: 3 and b: 2
+                </code>
+            </section>
+
+            <section class='main-section'>
+                <header id='stringReverse'>string reverse</header>
+                <p><strong>Question: </strong>How would you reverse a string in JavaScript?</p>
+                <p><strong>Answer: </strong>I can loop through the string and concatenate letters to a new string</p>
+                <ul>
+                    <li>
+                        try 1
+                        <code>
+                                function reverse(str){
+                                    var rtnStr = '';
+                                    for(var i = str.length-1; i>=0;i--){
+                                      rtnStr +=str[i];
+                                    }
+                                    return rtnStr;
+                                  }
+                                  
+                                  > reverse('you are a nice dude');
+                                    = "edud ecin a era uoy"
+                        </code>
+                        <p><strong>Interviewer: </strong>You know concatenation performed well in modern browsers but becomes slow in older browsers like IE8. Is there any different way, you can reverse a string?</p>
+                        <p><strong>Answer: </strong>sure. i can use an array and also add some checking. if string is null or other than string this will fail. let me do some type check as well. Using this array is like using string buffer in some server side languages.</p>
+                    </li>
+                    <li>
+                        try 2
+                        <code>
+                                function reverse(str){
+                                    var rtnStr = [];
+                                    if(!str || typeof str != 'string' || str.length < 2 ) return str;
+                                    
+                                    for(var i = str.length-1; i>=0;i--){
+                                      rtnStr.push(str[i]);
+                                    }
+                                    return rtnStr.join('');
+                                  }
+                        </code>
+                        <p><strong>Interviewer: </strong>What is the run time complexity?</p>
+                        <p><strong>You: </strong>O(n)</p>
+                        <p><strong>Interviewer: </strong>Can you make this better?</p>
+                        <p><strong>You: </strong> I can loop through half of the index and it will save little bit. (this is kind of useless, might not impress interviewer)</p>
+                    </li>
+                    <li>
+                        try 3
+                        <code>
+                                function reverse(str) {
+                                    str = str.split('');
+                                    var len = str.length,
+                                        halfIndex = Math.floor(len / 2) - 1,
+                                        revStr;
+                                    for (var i = 0; i <= halfIndex; i++) {
+                                      revStr = str[len - i - 1];
+                                      str[len - i - 1] = str[i];
+                                      str[i] = revStr;
+                                    }
+                                    return str.join('');
+                                  }
+                        </code>
+                        <p>Interviewer: That works, but can u do it in a recursive way?</p>
+                        <p>You: sure.</p> 
+                    </li>
+                    <li>
+                        try 4
+                        <code>
+                                function reverse (str) {
+                                    if (str === "") {
+                                        return "";
+                                    } else {
+                                        return reverse(str.substr(1)) + str.charAt(0);
+                                    }
+                                }
+                        </code>
+                    </li>
+                    <li>
+                        try 5
+                        <code>
+                                function reverse(str){
+                                    if(!str || str.length &lt 2) return str;
+                                    
+                                    return str.split('').reverse().join('');
+                                  }
+                        </code>
+                    </li>
+                    <li>
+                        try 6
+                        <code>
+                                String.prototype.reverse = function (){
+                                    if(!this || this.length &lt 2) return this;
+                                    
+                                    return this.split('').reverse().join('');
+                                  }
+                                  
+                                  > 'abc'.reverse();
+                                    = 'cba'
+                        </code>
+                    </li>
+                </ul>
+            </section>
+
+            <section class='main-section'>
+                <header id='reverseWords'>reverse words</header>
+                <p><strong>Question: </strong>How would you reverse words in a sentence?</p>
+                <p>Answer: You have to check for white space and walk through the string. Ask is there could be multiple whitespace.</p>
+                <code>
+                        //have a tailing white space
+                        //fix this later
+                        //now i m sleepy
+                        function reverseWords(str){
+                         var rev = [], 
+                             wordLen = 0;
+                         for(var i = str.length-1; i>=0; i--){
+                           if(str[i]==' ' || i==0){
+                             rev.push(str.substr(i,wordLen+1));
+                             wordLen = 0;
+                           }
+                           else
+                             wordLen++;
+                         }
+                         return rev.join(' ');
+                        }
+                </code>
+            </section>
+
+            <section class='main-section'>
+                <header id='reverseInPlace'>reverse in place</header>
+                <p><strong>Question: </strong>If you have a string like "I am the good boy". How can you generate "I ma eht doog yob"? Please note that the words are in place but reverse.</p>
+                <p>Answer: To do this, i have to do both string reverse and word reverse.</p>
+                <code>
+                        function reverseInPlace(str){
+                            return str.split(' ').reverse().join(' ').split('').reverse().join('');
+                          }
+                          
+                          > reverseInPlace('I am the good boy');
+                           = "I ma eht doog yob"
+                </code>
+            </section>
+
+            <section class='main-section'>
+                <header id='firstNonRepeatingChar'>First non repeating char</header>
+                <p><strong>Question: </strong>How could you find the first non repeating char in a string?</p>
+                <p>
+                        Answer: You must ask follow up questions.
+
+                        Clarification: Is it case sensitive?
+                        
+                        Interviewer: interviewer might say no.
+                        
+                        Clarification: is it very long string or couple hundred?
+                        
+                        Interviewer: Why does that matter
+                        
+                        you: for example, if it is a very long string say a million characters and i want to check whether 26 English characters are repeating. I might check whether all characters are duplicated in every 200 letters (for example) other than looping through the whole string. this will save computation time.
+                        
+                        Interviewer: For simplicity, you string is "the quick brown fox jumps then quickly blow air"
+                        
+                        Clarification: (silly question) ascii or unicode.
+                </p>
+                <code>
+                        function firstNonRepeatChar(str){
+                            var len = str.length,
+                                char, 
+                                charCount = {};
+                            for(var i =0; i<len; i++){
+                              char = str[i];
+                              if(charCount[char]){
+                                charCount[char]++;
+                              }
+                              else
+                                charCount[char] = 1;
+                            }
+                            for (var j in charCount){
+                              if (charCount[j]==1)
+                                 return j;
+                            }
+                          }  
+                          
+                          >firstNonRepeatChar('the quick brown fox jumps then quickly blow air');
+                           = "f"
+                </code>
+            </section>
+        </main>
+        
+    </html>
